@@ -1,5 +1,5 @@
 name: Playwright Tests
-on: [push, pull_request]
+on: [push]
 
 jobs:
   test:
@@ -13,9 +13,13 @@ jobs:
           
       - run: npm ci
       - run: npx playwright install --with-deps
+      
+      - name: List tests (DEBUG)
+        run: npx playwright test --list
+        
       - run: npx playwright test
       
-      - uses: actions/upload-artifact@v4  # ¡Versión actualizada!
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report
