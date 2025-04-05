@@ -14,13 +14,26 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps
       
-      - name: List tests (DEBUG)
-        run: npx playwright test --list
-        
-      - run: npx playwright test
+      # Debug: Verificar estructura REAL del proyecto
+      - name: Debug - Estructura
+        run: |
+          echo "Contenido de test/:"
+          ls -la test/
+          echo "Archivos .spec.ts:"
+          find test/ -name "*.spec.ts"
+          echo "Playwright config:"
+          cat playwright.config.ts || echo "No config file"
       
+      # Ejecutar desde el directorio test/
+      - name: Run tests
+        working-directory: ./test  # ¡Clave! Ejecuta desde /test
+        run: |
+          npx playwright test --list
+          npx playwright test
+      
+      # Subir reporte (ajusta la ruta si es necesario)
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report
-          path: playwright-report/
+          path: test/playwright-report/  # Asegúrate que coincida con tu ruta
