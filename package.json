@@ -1,0 +1,23 @@
+{
+  "name": "parcial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pola-22/parcial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pola-22/parcial/issues"
+  },
+  "homepage": "https://github.com/Pola-22/parcial#readme",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.51.1"
+  }
+}
