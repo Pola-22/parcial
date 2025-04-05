@@ -1,0 +1,25 @@
+name: Playwright Tests
+on: [push, pull_request]  # Se ejecuta al hacer push o PR
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Sistema operativo
+    steps:
+      - uses: actions/checkout@v4  # Descarga el código
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18  # Usa Node.js 18
+
+      - run: npm ci  # Instala dependencias
+
+      - run: npx playwright install --with-deps  # Instala navegadores
+
+      - run: npx playwright test  # Ejecuta pruebas
+
+      - name: Upload HTML report
+        if: always()  # Sube el reporte aunque fallen las pruebas
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-report
+          path: playwright-report/
